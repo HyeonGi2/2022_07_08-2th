@@ -37,7 +37,7 @@ public class ArticleController {
     }
     @RequestMapping("/doModify")
     @ResponseBody
-    public Article showModify(long id, String title, String body) {
+    public Article doModify(long id, String title, String body) {
         Article article = articleRepository.findById(id).get();
         if(title != null) {
             article.setTitle(title);
@@ -49,6 +49,18 @@ public class ArticleController {
 
         return article;
         /* http://localhost:8082/usr/article/doModify?id=2&title=%EC%88%98%EC%A0%95%EB%90%9C%202%EB%B2%88%20%EC%A0%9C%EB%AA%A9&body=%EC%88%98%EC%A0%95%EB%90%9C%20%EB%82%B4%EC%9A%A92 */
+    }
+
+    @RequestMapping("/doDelete")
+    @ResponseBody
+    public String doDelete(long id) {
+
+        articleRepository.deleteById(id);
+            return "%d번 게시물이 삭제되었습니다".formatted(id);
+
+
+
+        /* http://locaslhost:8082/usr/article/doDelete?id=2 */
     }
 }
 
